@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    button{
+        background: chartreuse;
+        border: red.2px
+        color: blue;
+    }
+    div{background: bisque;
+        width: 50%;
+    }
+</style>
+<body>
+<div align="center">
+    <h1>Manager product</h1>
+    <input placeholder="Name Product" id="nameP">
+    <button onclick="create()">Add Product</button>
+    <button onclick="saveEdit()">Edit Product</button>
+    <br>
+    <br>
+    <table id="display" style="width: 50%; text-align: center">
+
+    </table>
+</div>
+</body>
+</html>
+
+<script>
+    let array=[]
+function create(){
+    array.push(document.getElementById("nameP").value);
+    show();
+    }
+function show(){
+    let str=""
+    for (let i = 0; i < array.length; i++) {
+        str+="<tr>"
+        str+=`<td>${i+1} </td>`
+        str+=`<td> ${array[i]}</td>`
+        str+= `<td><button onclick="showedit(${i})"> Edit </button> </td>`
+        str+=`<td><button onclick="deleteP(${i})">Delete</button> </td>`
+        str+=`</tr>`
+    }
+    document.getElementById("display").innerHTML=str
+}
+// let indexedit=-1
+// function showedit(index){
+//         document.getElementById("nameP").value=array[index]
+//     indexedit=index
+// }
+    let indexEdit = -1;
+    function showedit(index) {
+        document.getElementById('nameP').value = array[index];
+        indexEdit = index;
+    }
+    function saveEdit(index){
+        array[indexEdit]=document.getElementById("nameP").value
+        indexEdit=-1
+        show()
+    }
+    function deleteP(index){
+        array.splice(index,1);
+        show()
+    }
+</script>
